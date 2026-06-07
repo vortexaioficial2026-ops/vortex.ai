@@ -14,11 +14,11 @@ WORKDIR /app
 # Isso aproveita o cache do Docker: se o package.json
 # não mudou, o npm install não roda de novo no próximo
 # build. Economiza tempo e recursos.
-COPY package.json package-lock.json ./
+COPY package.json ./
 
 # Instala apenas dependências de produção.
 # --omit=dev exclui eslint e outras ferramentas de dev.
-RUN npm ci --omit=dev
+RUN npm install --omit=dev
 
 # --- ESTÁGIO 2: imagem final de produção ---
 FROM node:20-slim AS production
